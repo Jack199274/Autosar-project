@@ -1,0 +1,1739 @@
+<?xml version='1.0'?>
+<datamodel version="4.0" 
+           xmlns="http://www.tresos.de/_projects/DataModel2/10/root.xsd" 
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/10/attribute.xsd" 
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">        
+<!--
+*   @file    Crypto.xdm
+*   @version 1.0.2
+*
+*   @brief   AUTOSAR Crypto - Tresos Studio plugin schema file
+*   @details This file contains the schema configuration for and Crypto Tresos Studio plugin.
+-->
+<!--
+====================================================================================================
+*   Project              : AUTOSAR 4.3 MCAL
+*   Platform             : ARM
+*   Peripheral           : Crypto
+*   Dependencies         : none
+*
+*   Autosar Version      : 4.3.1
+*   Autosar Revision     : ASR_REL_4_3_REV_0001
+*   Autosar Conf.Variant :
+*   SW Version           : 1.0.2
+*   Build Version        : S32K1XX_MCAL_1_0_2_RTM_ASR_REL_4_3_REV_0001_23-Apr-21
+*
+*   (c) Copyright 2006-2016 Freescale Semiconductor, Inc. 
+*       Copyright 2017-2021 NXP
+*   All Rights Reserved.
+====================================================================================================
+====================================================================================================
+====================================================================================================
+-->
+
+  <d:ctr type="AUTOSAR" factory="autosar" 
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+    <!-- @implements Crypto_Object -->
+      <d:ctr name="TS_T40D2M10I2R0" type="AR-PACKAGE">
+        <a:a name="UUID" value="ECUC:35cab853-b883-4ffd-98d6-c2226b4d6856"/>
+            <d:lst type="ELEMENTS">
+              <d:chc name="Crypto" type="AR-ELEMENT" value="MODULE-DEF">
+                <v:ctr type="MODULE-DEF">
+                        <a:a name="RELEASE" value="asc:4.3"/>
+                  <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                    <ad:ADMIN-DATA>
+                      <ad:DOC-REVISIONS>
+                        <ad:DOC-REVISION>
+                      <ad:REVISION-LABEL>4.3.1</ad:REVISION-LABEL>
+                          <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                        </ad:DOC-REVISION>
+                      </ad:DOC-REVISIONS>
+                    </ad:ADMIN-DATA>
+                  </a:a>
+                  <a:a name="DESC" 
+                       value="EN: Configuration of the Crypto (CryptoDriver) module"/>
+                  <a:a name="UUID" value="ECUC:de8a8d52-da03-44ff-b1e2-411671a322d5"/>
+                  
+                  <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
+                        <a:a name="LABEL" value="Config Variant"/>
+                        <a:a name="UUID" value="ECUC:b187c485-ecd2-4c16-a62b-d853737f59b9"/>
+                        <a:a name="DESC">
+                            <a:v>
+                                <![CDATA[EN:<html>
+                                    VariantPreCompile: Only precompile time configuration parameters. Only one set of parameters.<p/>
+                                    VariantPostBuild: Mix of precompile and postbuild time configuration parameters. Only one set of parameters.<p/>
+                                    VariantPostBuildSelectable: Mix of precompile and postbuild time configuration parameters. More sets of parameters.<p/>
+                                </html>]]>
+                            </a:v>
+                        </a:a>
+                        <a:da name="DEFAULT" value="VariantPreCompile"/>
+                        <a:da name="RANGE">
+                            <a:v>VariantPreCompile</a:v>
+                        </a:da>
+                  </v:var>
+                  
+                  <!-- @implements CryptoDriverObjects_Object -->
+                  <v:ctr name="CryptoDriverObjects" type="IDENTIFIABLE">
+                    <a:a name="DESC" value="EN: Container for CRYPTO Objects, there can be maximum 2 crypto driver objects configured: one for CAAM (symmetric) and one FAME (asymmetric)."/>
+                    <a:a name="UUID" value="ECUC:8bfb756a-0a3d-4cf7-b36f-e827b136e718"/>
+                    
+                    <v:lst name="CryptoDriverObject" type="MAP">
+                    
+                      <!-- @implements CryptoDriverObject_Object -->
+                      <v:ctr name="CryptoDriverObject" type="IDENTIFIABLE">
+                        <a:a name="DESC" 
+                             value="EN: Configuration of a CryptoDriverObject"/>
+                        <a:a name="UUID" 
+                             value="ECUC:ff2e21d8-4e16-439c-8782-23560503fb55"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <!-- @implements CryptoDriverObjectId_Object -->
+                        <v:var name="CryptoDriverObjectId" type="INTEGER">
+                          <a:a name="DESC" 
+                               value="EN: Identifier of the Crypto Driver Object. The Crypto Driver Object offers different crypto primitives."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                          <a:a name="UUID" 
+                               value="ECUC:184214e8-50e9-404c-9cce-18c074c107a2"/>
+                          <a:da name="DEFAULT" type="XPath" expr="num:i(node:fallback(node:current()/../@index, num:i(1)) + 1)" />
+                          <a:da name="RANGE" type="XPath">
+                             <a:tst expr="text:uniq(../../*/CryptoDriverObjectId, .)"
+                             false="Duplicated value, CryptoDriverObjectId must be unique."/>
+                          </a:da>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=4294967295"/>
+                            <a:tst expr="&gt;=1"/>
+                          </a:da>
+                        </v:var>
+                        
+                        <!-- @implements CryptoQueueSize_Object -->
+                        <v:var name="CryptoQueueSize" type="INTEGER">
+                          <a:a name="DESC" 
+                               value="EN: Size of the queue in the Crypto Driver. Defines the maximum number of jobs in the Crypto Driver Object queue. If it is set to 0, queueing is disabled in the Crypto Driver Object."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID" 
+                               value="ECUC:96ee780d-0ae8-4004-a010-86ad1f6e1923"/>
+                          <a:da name="DEFAULT" value="0"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=4294967295"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+                        
+                        <v:var name="CryptoPrimitiveType" 
+                                 type="ENUMERATION">
+                            <a:a name="DESC" 
+                                 value="EN: Vendor specific: Determines if the crypto primitives are symmetric or asymmetric"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="NXP"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:ba677378-f161-4115-9ad1-c88211978e9d"/>
+                            <a:da name="RANGE">
+                              <a:v>CRYPTO_SYMMETRIC_ALGORITHMS</a:v>
+                              <a:v>CRYPTO_ASYMMETRIC_ALGORITHMS</a:v>
+                            </a:da>
+                          <a:da name="DEFAULT" value="CRYPTO_SYMMETRIC_ALGORITHMS"/>
+                          </v:var>
+                          
+                        <!-- @implements CryptoPrimitiveRef_Object -->
+                        <v:lst name="CryptoPrimitiveRef">
+                          <a:da name="MIN" value="1"/>
+                          <a:a name="COLUMNS"> 
+                           <a:v>CryptoPrimitiveRef</a:v>
+                          </a:a>
+                          <v:ref name="CryptoPrimitiveRef" type="REFERENCE">
+                            <a:a name="DESC" 
+                                 value="EN: Refers to primitive in the CRYPTO."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:80ed025c-16b4-4ee0-ba96-bda6e02c2c9f"/>
+                            <a:da name="REF" 
+                                  value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Crypto/CryptoPrimitives/CryptoPrimitive"/>
+                            <a:da name="RANGE" type="XPath">
+                                <a:tst expr="node:paths(../../CryptoPrimitive/*)"/> <!-- Select for reference only the options available inside the CryptoPrimitives -->
+                            </a:da>
+                            <a:da name="INVALID" type="XPath">
+                                <a:tst expr="node:refvalid(.)" 
+                                        false="The configured node does not exist or may not be referenced."/>      
+                                <a:tst expr="(
+                                                  (node:fallback(../../CryptoPrimitiveType, 'CRYPTO_SYMMETRIC_ALGORITHMS') = 'CRYPTO_SYMMETRIC_ALGORITHMS')
+                                                  and
+                                                  (
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_BRAINPOOL' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_ECCNIST' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_ECIES' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_ED25519' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_RSA' )
+                                                  )
+                                              )
+                                        or
+                                             (
+                                                  (node:fallback(../../CryptoPrimitiveType, 'CRYPTO_SYMMETRIC_ALGORITHMS') = 'CRYPTO_ASYMMETRIC_ALGORITHMS')
+                                                  and
+                                                  (
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_3DES' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_AES' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_BLAKE_1_256' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_BLAKE_1_512' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_BLAKE_2s_256' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_BLAKE_2s_512' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_CHACHA' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_RIPEMD160' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_RNG' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SECURECOUNTER' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA1' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA2_224' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA2_256' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA2_384' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA2_512' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA2_512_224' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA2_512_256' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA3_224' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA3_256s' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA3_384' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHA3_512' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHAKE128' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SHAKE256' ) and
+                                                  ( (node:refs(node:value(.))/CryptoPrimitiveAlgorithmFamily)!='CRYPTO_ALGOFAM_SIPHASH' )
+                                                  )
+                                              )"
+                                        false="Incorrect modes, for one crypto driver object you should select only symmetric (AES, 3DES, BLAKE, CHACHA, random number generator, hash) or asymmetric modes (RSA, ECC), based on the CryptoPrimitiveType variable."/>                                          
+                            </a:da>                                        
+                          </v:ref>
+                        </v:lst>
+
+                      </v:ctr>
+                    </v:lst>
+                  </v:ctr>
+                  
+                  <!-- @implements CryptoGeneral_Object -->
+                  <v:ctr name="CryptoGeneral" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: Container for common configuration options"/>
+                    <a:a name="UUID" 
+                         value="ECUC:52ae4770-d711-460d-b08f-82ed9ed064e6"/>
+                         
+                    <!-- @implements CryptoDevErrorDetect_Object -->
+                    <v:var name="CryptoDevErrorDetect" type="BOOLEAN">
+                      <a:a name="DESC" 
+                           value="EN: Switches the development error detection and notification on or off."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="ECUC:fa00476b-ef2e-48a8-82d8-9ac859b82c59"/>
+                     <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+
+                    <!-- @implements CryptoEnableUserModeSupport_Object -->
+                    <v:var name="CryptoEnableUserModeSupport" type="BOOLEAN">
+                        <a:a name="DESC">
+                            <a:v>
+                                <![CDATA[EN:<html>
+                                   <p> Vendor specific: When this parameter is enabled, the CRYPTO module will adapt to run from User Mode</p>
+                                    <p>Note: No special measures need to be taken to run CRYPTO driver from user mode, it can be executed at any time from both supervisor and user mode.</p>
+                                    <p>For more information and availability on this platform, please see chapter User Mode Support in IM.</p>
+                                    Note: Implementation Specific Parameter.
+                                </html>]]>
+                            </a:v>
+                        </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                        <a:a name="LABEL" value="Mcu Enable User Mode Support"/>
+                        <a:a name="ORIGIN" value="NXP"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="SCOPE" value="LOCAL"/>
+                        <a:a name="UUID" value="ECUC:fdf29f79-dbae-4cd2-abf2-c0941851a05e"/>
+                        <a:da name="DEFAULT" value="false"/>
+                        <a:da name="READONLY" value="true"/>
+                    </v:var>
+
+                    <v:var name="CryptoTimeoutDuration" type="INTEGER">
+                        <a:a name="LABEL" value="Crypto Timeout Duration"/>
+                        <a:a name="DESC">
+                            <a:v>
+                                <![CDATA[EN:<html><p> Vendor specific: Timeout value for the Crypto commands. </p></html>]]>
+                            </a:v>
+                        </a:a>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>   
+                        <a:a name="ORIGIN" value="NXP"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" value="ECUC:89cf6b40-1e18-4786-9376-e471db9a4f66"/>
+                        <a:da name="DEFAULT" value="2147483647"/>
+                        <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=4294967295"/>
+                            <a:tst expr="&gt;=0"/>
+                        </a:da>
+                    </v:var>
+
+                    <!-- @implements CryptoInstanceId_Object -->
+                    <v:var name="CryptoInstanceId" type="INTEGER">
+                      <a:a name="DESC" 
+                           value="EN: Instance ID of the crypto driver. This ID is used to discern several crypto drivers in case more than one driver is used in the same ECU."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="ECUC:3d2298b1-35e6-4e2d-b1fd-d43aa3722b80"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=255"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    
+                      <!-- @implements CryptoMainFunctionPeriod_Object -->
+                      <v:var name="CryptoMainFunctionPeriod" type="FLOAT">
+                        <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="DESC" 
+                             value="EN: Specifies the period of main function Crypto_MainFunction in seconds."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SCOPE" value="LOCAL"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="ECUC:d0096c6e-6bbd-428d-ba75-552584f18fc1"/>
+                        <a:da name="DEFAULT" value="1000"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;99999999"/>
+                          <a:tst expr="&gt;0.0"/>
+                        </a:da>
+                      </v:var>
+                      
+                    <!-- @implements CryptoVersionInfoApi_Object -->
+                    <v:var name="CryptoVersionInfoApi" type="BOOLEAN">
+                      <a:a name="DESC" 
+                           value="EN: Pre-processor switch to enable and disable availability of the API Crypto_GetVersionInfo()."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="ECUC:8c199a69-957a-46b7-9e29-3353983b72fb"/>
+                     <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                    
+                    <a:da name="INVALID" type="XPath">
+                    <a:tst expr="(
+                                 ( node:exists(../CryptoKeyElements) and node:exists(../CryptoKeyTypes) and node:exists(../CryptoKeys) )
+                                 )
+                                 or
+                                 (
+                                 (not(node:exists(../CryptoKeyElements)) and not( node:exists(../CryptoKeyTypes) ) and not(node:exists(../CryptoKeys) ) )
+                                  )"
+                     false=" Containers CryptoKeyElements, CryptoKeys, CryptoKeyTypes must be simultaneously active or disabled."/>
+                    </a:da>
+                   </v:ctr>
+
+                    <!-- @implements CryptoKeyElements_Object -->
+                    <v:ctr name="CryptoKeyElements" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: Container for Crypto key elements"/>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="UUID" 
+                           value="ECUC:02e332b3-b472-45cc-9b7c-4f0d09576f7c"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <v:lst name="CryptoKeyElement" type="MAP">
+                        <a:da name="MIN" value="1"/>
+                        <!-- @implements CryptoKeyElement_Object -->
+                        <v:ctr name="CryptoKeyElement" type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: Configuration of a CryptoKeyElement"/>
+                          <a:a name="UUID" 
+                               value="ECUC:5f161278-5b12-4c9b-b07a-1f95a35b6041"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <v:var name="CryptoKeyElementUniqueIndex" type="INTEGER">
+                              <a:a name="DESC">
+                                  <a:v>
+                                      <![CDATA[EN:<html>
+                                          Vendor specific: Unique non-editable index.
+                                      </html>]]>
+                                  </a:v>
+                              </a:a>
+                              <a:a name="LABEL" value="CryptoKeyElementUniqueIndex"/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="NXP"/>
+                              <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                              <a:a name="UUID" value="ECUC:4e05c426-67f4-4e47-b644-194ce781234d"/>
+                              <a:da name="EDITABLE" value="true"/>
+                              <a:da name="DEFAULT" type="XPath" expr="node:fallback(node:current()/../@index, num:i(1))" />
+                              <a:da name="RANGE" type="XPath">
+                                            <a:tst expr="(node:fallback(.,1) &gt;= 0) and (node:fallback(.,1) &lt; num:i(count(node:fallback(node:current()/../../*, 1 ))))" false="Value out of range: must be in range 0 to N-1 (N is number of configured elements). Use the Calc button to calculate correct default value."/>
+                                            <a:tst expr="text:uniq(node:fallback(../../*/CryptoKeyElementUniqueIndex, text:split('1 2 3')), node:fallback(.,1) )" false="Duplicated value, must be unique. Use the Calc button to calculate correct default value."/>                                                 
+                                        </a:da>
+                              <a:da name="INVALID" type="Range">
+                                  <a:tst expr="&gt;=0"/>
+                                  <a:tst expr="&lt;=255"/>
+                              </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyElementAllowPartialAccess_Object -->
+                          <v:var name="CryptoKeyElementAllowPartialAccess" type="BOOLEAN">
+                            <a:a name="DESC" 
+                                 value="EN: Enable or disable writing and reading the key element with data smaller than the size of the element."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:d500ad2f-c66a-4cdc-9688-1056e2934f51"/>
+                            <a:da name="DEFAULT" value="false"/>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyElementFormat_Object -->
+                          <v:var name="CryptoKeyElementFormat" type="ENUMERATION">
+                            <a:a name="DESC" 
+                                 value="EN: Defines the format for the key element. This is the format used to provide or extract the key data from the driver."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:5f151295-b33b-486c-b95f-7345724d71f4"/>
+                            <a:da name="RANGE">
+                              <a:v>CRYPTO_KE_FORMAT_BIN_CERT_CVC</a:v>
+                              <a:v>CRYPTO_KE_FORMAT_BIN_CERT_X509_V3</a:v>
+                              <a:v>CRYPTO_KE_FORMAT_BIN_IDENT_PRIVATEKEY_PKCS8</a:v>
+                              <a:v>CRYPTO_KE_FORMAT_BIN_IDENT_PUBLICKEY</a:v>
+                              <a:v>CRYPTO_KE_FORMAT_BIN_OCTET</a:v>
+                              <a:v>CRYPTO_KE_FORMAT_BIN_RSA_PRIVATEKEY</a:v>
+                              <a:v>CRYPTO_KE_FORMAT_BIN_RSA_PUBLICKEY</a:v>
+                              <a:v>CRYPTO_KE_FORMAT_BIN_SHEKEYS</a:v>
+                            </a:da>
+                          <a:da name="DEFAULT" value="CRYPTO_KE_FORMAT_BIN_OCTET"/>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyElementId_Object -->
+                          <v:var name="CryptoKeyElementId" type="INTEGER">
+                            <a:a name="DESC" 
+                                 value="EN: Identifier of the CRYPTO key element"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:f3f20c50-dcf8-480d-97f4-a461605e57eb"/>
+                            <a:da name="DEFAULT" value="1"/>
+                            <a:da name="INVALID" type="Range">
+                              <a:tst expr="&lt;=4294967295"/>
+                              <a:tst expr="&gt;=1"/>
+                            </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyElementInitValue_Object -->
+                          <v:var name="CryptoKeyElementInitValue" type="STRING">
+                            <a:a name="DESC" 
+                                 value="EN: Value which will be used to fill the element during initialisation, when the element is not already initialized."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:60c1b90e-435c-4c88-8e00-ad06c97fd0b9"/>  
+                            <a:da name="DEFAULT" value=""/>
+                            <a:da name="INVALID" type="XPath">
+                                <a:tst expr="(
+                                       (text:match(normalize-space(.),'^[0-9a-fA-F]*$')) and
+                                       (num:i(string-length(node:current())) &lt; ((2 * num:i(node:value(../CryptoKeyElementSize)))) + 1) and
+                                       (num:i(string-length(node:current())) mod 2 = 0)
+                                      )"
+                                false="This node is an octet string. Please use 0-9 a-f A-F characters, without spaces. If this field is configured, it should have a number of bytes equal to CryptoKeyElementSize field."/>
+                                   <a:tst expr="(
+                                                 ( (node:value(../CryptoKeyElementId) = 1) and (num:i(string-length(.)) = 0) ) or
+                                                 (node:value(../CryptoKeyElementId) != 1)
+                                                 )
+                                               "
+                                                                                    
+                                false="Key material (key element ID 1) can only be initialized via Crypto_KeyElementSet function.."/>  
+                            </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyElementPersist_Object -->
+                          <v:var name="CryptoKeyElementPersist" type="BOOLEAN">
+                            <a:a name="DESC" 
+                                 value="EN: Enable or disable persisting of the key element in non-volatile storage."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:f3e5f9e1-88f0-4dcd-b253-1d65abe6cf2e"/>
+                            <a:da name="DEFAULT" value="false"/>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyElementReadAccess_Object -->
+                          <v:var name="CryptoKeyElementReadAccess" type="ENUMERATION">
+                            <a:a name="DESC" 
+                                 value="EN: Define the reading access rights of the key element."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:cfe5b2f0-b2a8-4627-9b31-97a0c5f9598e"/>
+                            <a:da name="DEFAULT" value="CRYPTO_RA_ALLOWED"/>
+                            <a:da name="RANGE">
+                              <a:v>CRYPTO_RA_ALLOWED</a:v>
+                              <a:v>CRYPTO_RA_DENIED</a:v>
+                              <a:v>CRYPTO_RA_ENCRYPTED</a:v>
+                              <a:v>CRYPTO_RA_INTERNAL_COPY</a:v>
+                            </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyElementSize_Object -->
+                          <v:var name="CryptoKeyElementSize" type="INTEGER">
+                            <a:a name="DESC" 
+                                 value="EN: Maximum Size size of a CRYPTO key element in bytes"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:ee48f9b6-2cee-44db-b565-b17abc2b4e1a"/>
+                            <a:da name="DEFAULT" value="16"/>
+                            <a:da name="INVALID" type="Range">
+                              <a:tst expr="&lt;=4294967295"/>
+                              <a:tst expr="&gt;=1"/>
+                            </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyElementWriteAccess_Object -->
+                          <v:var name="CryptoKeyElementWriteAccess" type="ENUMERATION">
+                            <a:a name="DESC" 
+                                 value="EN: Define the writing access rights of the key element"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:da name="DEFAULT" value="CRYPTO_WA_ALLOWED"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:22aff509-d888-4612-af42-c1d514d982c3"/>
+                            <a:da name="RANGE">
+                              <a:v>CRYPTO_WA_ALLOWED</a:v>
+                              <a:v>CRYPTO_WA_DENIED</a:v>
+                              <a:v>CRYPTO_WA_ENCRYPTED</a:v>
+                              <a:v>CRYPTO_WA_INTERNAL_COPY</a:v>
+                            </a:da>
+                          </v:var>
+                          
+                            <!-- @implements CryptoKeyElementVirtualTargetRef_Object -->
+                            <v:ref name="CryptoKeyElementVirtualTargetRef" type="REFERENCE">
+                              <a:a name="OPTIONAL" value="true"/>
+                              <a:a name="DESC" 
+                                   value="EN: Refers to a key element which will contain the actual data. If the Reference is configured, the key element will be a virtual key element."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                              <a:a name="SCOPE" value="LOCAL"/>
+                              <a:a name="UUID" 
+                                   value="ECUC:e13155ba-f5a2-4e81-8256-1d29b55827ae"/>
+                              <a:da name="REF" 
+                                    value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement"/>
+                            </v:ref>
+                        </v:ctr>
+                      </v:lst>
+                    </v:ctr>
+                    
+                    <!-- @implements CryptoKeyTypes_Object -->
+                    <v:ctr name="CryptoKeyTypes" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: Container for CRYPTO key types"/>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                         <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="UUID" 
+                           value="ECUC:64a47910-e3a3-4ede-8aa2-73b96566ced6"/>
+                      <v:lst name="CryptoKeyType" type="MAP">
+                        <a:da name="MIN" value="1"/>
+                         <a:a name="COLUMNS"> 
+                         <a:v>CryptoKeyType</a:v>
+                         <a:v>CryptoKeyElementRef</a:v>
+                       </a:a>
+                                            
+                        <!-- @implements CryptoKeyType_Object -->
+                        <v:ctr name="CryptoKeyType" type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: Configuration of a CryptoKeyType"/>
+                          <a:a name="UUID" 
+                               value="ECUC:50a54a5d-0b12-4b70-9bbf-5c9ea7a093a9"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                               <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <v:lst name="CryptoKeyElementRef">
+                            <a:da name="MIN" value="1"/>
+                            <!-- @implements CryptoKeyElementRef_Object -->
+                            <v:ref name="CryptoKeyElementRef" type="REFERENCE">
+                              <a:a name="DESC" 
+                                   value="EN: Refers to a pointer in the CRYPTOCrypto Key Element, which holds the data of the crypto key element."/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                                <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                              <a:a name="SCOPE" value="LOCAL"/>
+                              <a:a name="UUID" 
+                                   value="ECUC:38404d86-ac67-463a-a90c-0fd997b527b2"/>
+                              <a:da name="REF" 
+                                    value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Crypto/CryptoKeyElements/CryptoKeyElement"/>
+                              <a:da name="RANGE" type="XPath">
+                                <a:tst expr="node:paths(../../CryptoKeyElement/*)"/> <!-- Select for reference only the options available inside the CryptoKeyElement -->
+                              </a:da>
+                              <a:da name="INVALID" type="XPath">
+                                <a:tst expr="node:refvalid(.)" 
+                                        false="The configured node does not exist or may not be referenced."/>                                          
+                              </a:da>
+                            </v:ref>
+                          </v:lst>
+                        </v:ctr>
+                      </v:lst>
+                    </v:ctr>
+                    
+                    <!-- @implements CryptoKeys_Object -->
+                    <v:ctr name="CryptoKeys" type="IDENTIFIABLE">
+                      <a:a name="DESC" value="EN: Container for CRYPTO keys"/>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="UUID" 
+                           value="ECUC:ffa40c6c-7039-4372-a45f-1939c3f0860d"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <v:lst name="CryptoKey" type="MAP">
+                        <a:da name="MIN" value="1"/>
+                         <a:a name="COLUMNS"> 
+                         <a:v>CryptoKey</a:v>
+                         <a:v>CryptoKeyDeriveIterations</a:v>
+                         <a:v>CryptoKeyId</a:v>
+                         <a:v>CryptoKeyTypeRef</a:v>
+                       </a:a>
+                           
+                        <!-- @implements CryptoKey_Object -->
+                        <v:ctr name="CryptoKey" type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: Configuration of a CryptoKey"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="UUID" 
+                               value="ECUC:bd39e0fa-fb60-420a-92b9-c290a72800f5"/>
+                               
+                          <!-- @implements CryptoKeyDeriveIterations_Object -->
+                          <v:var name="CryptoKeyDeriveIterations" type="INTEGER">
+                            <a:a name="DESC" 
+                                 value="EN: Holds the number of iterations to be performed by the key derivation primitive"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:58deaa59-a747-4fb6-99db-7d8e39108a4a"/>
+                            <a:da name="DEFAULT" value="1"/>
+                            <a:da name="INVALID" type="Range">
+                              <a:tst expr="&lt;=4294967295"/>
+                              <a:tst expr="&gt;=1"/>
+                            </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyId_Object -->
+                          <v:var name="CryptoKeyId" type="INTEGER">
+                            <a:a name="DESC" 
+                                 value="EN: Identifier of the CRYPTO Key"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:12278a60-a4ed-4f17-9676-8f68ffa68cf6"/>
+                            <a:da name="DEFAULT" type="XPath" expr="num:i(node:fallback(node:current()/../@index, num:i(1)) + 1)" />
+                            <a:da name="RANGE" type="XPath">
+                                <a:tst expr="text:uniq(../../*/CryptoKeyId, .)"
+                                false="Duplicated value, CryptoKeyId must be unique."/>
+                            </a:da>
+                            <a:da name="INVALID" type="Range">
+                              <a:tst expr="&lt;=4294967295"/>
+                              <a:tst expr="&gt;=1"/>
+                            </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoKeyTypeRef_Object -->
+                          <v:ref name="CryptoKeyTypeRef" type="REFERENCE">
+                            <a:a name="DESC" 
+                                 value="EN: Refers to a pointer in the CRYPTOto a CryptoKeyType. The CryptoKeyType provides the information which key elements are contained in a CryptoKey."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:e68f7fcd-0b36-48c7-908e-7b3bd44fbf18"/>
+                            <a:da name="REF" 
+                                  value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Crypto/CryptoKeyTypes/CryptoKeyType"/>
+                          <a:da name="RANGE" type="XPath">
+                                <a:tst expr="node:paths(../CryptoKeyType/*)"/> <!-- Select for reference only the options available inside the CryptoKeyType -->
+                          </a:da>
+                          <a:da name="INVALID" type="XPath">
+                                <a:tst expr="node:refvalid(.)" 
+                                        false="The configured node does not exist or may not be referenced."/>                                          
+                          </a:da>                        
+                          </v:ref>
+                        </v:ctr>
+                      </v:lst>
+                    </v:ctr>
+                    
+                  <v:lst name="CryptoPrimitives" type="MAP">
+                  <a:a name="COLUMNS"> 
+                   <a:v>CryptoPrimitives</a:v>
+                  </a:a>
+                  
+                    <!-- @implements CryptoPrimitives_Object -->
+                    <v:ctr name="CryptoPrimitives" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: Container for CRYPTO primitives"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="UUID" 
+                           value="ECUC:5089c3fd-56b3-4933-ad9d-f21ecf980357"/>
+      
+                      <v:lst name="CryptoPrimitive" type="MAP">
+                       <a:a name="COLUMNS"> 
+                         <a:v>CryptoPrimitive</a:v>
+                         <a:v>CryptoPrimitiveAlgorithmFamily</a:v>
+                         <a:v>CryptoPrimitiveAlgorithmMode</a:v>
+                         <a:v>CryptoPrimitiveAlgorithmSecondaryFamily</a:v>
+                         <a:v>CryptoPrimitiveService</a:v>
+                       </a:a> 
+                       
+                        <!-- @implements CryptoPrimitive_Object -->
+                        <v:ctr name="CryptoPrimitive" type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: Configuration of a CryptoPrimitive"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="UUID" 
+                               value="ECUC:11ffd06f-8a89-4297-8805-9a25208d5233"/>
+                               
+                          <!-- @implements CryptoPrimitiveAlgorithmFamily_Object -->
+                          <v:var name="CryptoPrimitiveAlgorithmFamily" type="ENUMERATION">
+                            <a:a name="DESC" 
+                                 value="EN: Determines the algorithm family used for the crypto service"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:9ba30089-69cf-4e7c-8722-b6338b0181f9"/>
+                            <a:da name="RANGE">
+                              <a:v>CRYPTO_ALGOFAM_3DES</a:v>
+                              <a:v>CRYPTO_ALGOFAM_AES</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BLAKE_1_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BLAKE_1_512</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BLAKE_2s_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BLAKE_2s_512</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BRAINPOOL</a:v>
+                              <a:v>CRYPTO_ALGOFAM_CHACHA</a:v>
+                              <a:v>CRYPTO_ALGOFAM_CUSTOM</a:v>
+                              <a:v>CRYPTO_ALGOFAM_ECCNIST</a:v>
+                              <a:v>CRYPTO_ALGOFAM_ECIES</a:v>
+                              <a:v>CRYPTO_ALGOFAM_ED25519</a:v>
+                              <a:v>CRYPTO_ALGOFAM_NOT_SET</a:v>
+                              <a:v>CRYPTO_ALGOFAM_RIPEMD160</a:v>
+                              <a:v>CRYPTO_ALGOFAM_RNG</a:v>
+                              <a:v>CRYPTO_ALGOFAM_RSA</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SECURECOUNTER</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA1</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_224</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_384</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_512</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_512_224</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_512_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA3_224</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA3_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA3_384</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA3_512</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHAKE128</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHAKE256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SIPHASH</a:v>
+                            </a:da>
+                            <a:da name="DEFAULT" value="CRYPTO_ALGOFAM_NOT_SET"/>
+                            <a:da name="INVALID" type="XPath">
+                              <a:tst expr="(
+                                           (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'AEAD_ENCRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'AEAD_DECRYPT')
+                                            )
+                                            and
+                                            (
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_3DES') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_AES') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_CUSTOM')                                    
+                                            )
+                                           )"
+                                  true="AEAD_ENCRYPT and AEAD_DECRYPT support: CRYPTO_ALGOFAM_3DES, CRYPTO_ALGOFAM_AES, CRYPTO_ALGOFAM_CUSTOM. "/>
+                              <a:tst expr="(
+                                           (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'SIGNATURE_GENERATE') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'SIGNATURE_VERIFY')
+                                            )
+                                            and
+                                            (
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BRAINPOOL') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_ECCNIST') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_CUSTOM') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_ED25519') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_RSA')
+                                            )
+                                           )"
+                                  true="SIGNATURE_GENERATE and SIGNATURE_VERIFY support: CRYPTO_ALGOFAM_BRAINPOOL, CRYPTO_ALGOFAM_ECCNIST, CRYPTO_ALGOFAM_CUSTOM, CRYPTO_ALGOFAM_ED25519, CRYPTO_ALGOFAM_RSA. "/>
+                              <a:tst expr="(
+                                           (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'ENCRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'DECRYPT')
+                                            )
+                                            and
+                                            (
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_3DES') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_AES') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_CUSTOM') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_CHACHA') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_RSA') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_ECIES')
+                                            )
+                                           )"
+                                  true="ENCRYPT and DECRYPT support: CRYPTO_ALGOFAM_3DES, CRYPTO_ALGOFAM_AES, CRYPTO_ALGOFAM_CUSTOM, CRYPTO_ALGOFAM_CHACHA, CRYPTO_ALGOFAM_RSA, CRYPTO_ALGOFAM_ECIES. "/>
+                              <a:tst expr="(
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'HASH')
+                                            and
+                                            (
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BLAKE_1_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BLAKE_1_512') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BLAKE_2s_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BLAKE_2s_512') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_CUSTOM') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_RIPEMD160') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA1') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_224') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_384') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_512') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_512_224') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_512_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_224') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_384') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_512') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHAKE128') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHAKE256')
+                                            )
+                                           )"
+                                  true="HASH supports: CRYPTO_ALGOFAM_BLAKE, CRYPTO_ALGOFAM_SHA, CRYPTO_ALGOFAM_CUSTOM, CRYPTO_ALGOFAM_SHAKE, CRYPTO_ALGOFAM_RIPEMD160"/>
+                              <a:tst expr="(
+                                            (
+                                              (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'MAC_GENERATE') or
+                                              (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'MAC_VERIFY')
+                                            )
+                                            and
+                                            (
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_3DES') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_AES') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BLAKE_1_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BLAKE_1_512') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BLAKE_2s_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BLAKE_2s_512') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_BLAKE_CHACHA') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_CUSTOM') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_RIPEMD160') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_RNG') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA1') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_224') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_384') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_512') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_512_224') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA2_512_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_224') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_256') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_384') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_512') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_SHAKE128') and
+                                              (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_SHA3_SHAKE256')  
+                                            )
+                                           )"
+                                  true="MAC_GENERATE, MAC_VERIFY support: CRYPTO_ALGOFAM_3DES, CRYPTO_ALGOFAM_AES, CRYPTO_ALGOFAM_BLAKE, CRYPTO_ALGOFAM_CUSTOM, CRYPTO_ALGOFAM_RIPEMD160, CRYPTO_ALGOFAM_RNG, CRYPTO_ALGOFAM_SHA."/>
+                            <a:tst expr="(
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'RANDOM')
+                                            and
+                                            (
+                                            (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_NOT_SET') and
+                                            (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_RNG') and
+                                            (node:fallback(., 'CRYPTO_ALGOFAM_AES') != 'CRYPTO_ALGOFAM_CUSTOM')
+                                            )
+                                           )"
+                                  true="For RANDOM please choose CRYPTO_ALGOFAM_NOT_SET, CRYPTO_ALGOMODE_NOT_SET"/>
+                                  
+                          </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoPrimitiveAlgorithmMode_Object -->
+                          <v:var name="CryptoPrimitiveAlgorithmMode" type="ENUMERATION">
+                            <a:a name="DESC" 
+                                 value="EN: Determines the algorithm mode used for the crypto service"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:f9fbff04-ec0b-495a-9de3-5f9340102e40"/>
+                            <a:da name="RANGE">
+                              <a:v>CRYPTO_ALGOMODE_12ROUNDS</a:v>
+                              <a:v>CRYPTO_ALGOMODE_20ROUNDS</a:v>
+                              <a:v>CRYPTO_ALGOMODE_8ROUNDS</a:v>
+                              <a:v>CRYPTO_ALGOMODE_CBC</a:v>
+                              <a:v>CRYPTO_ALGOMODE_CFB</a:v>
+                              <a:v>CRYPTO_ALGOMODE_CMAC</a:v>
+                              <a:v>CRYPTO_ALGOMODE_CTR</a:v>
+                              <a:v>CRYPTO_ALGOMODE_CTRDRBG</a:v>
+                              <a:v>CRYPTO_ALGOMODE_CUSTOM</a:v>
+                              <a:v>CRYPTO_ALGOMODE_ECB</a:v>
+                              <a:v>CRYPTO_ALGOMODE_GCM</a:v>
+                              <a:v>CRYPTO_ALGOMODE_CCM</a:v>
+                              <a:v>CRYPTO_ALGOMODE_GMAC</a:v>
+                              <a:v>CRYPTO_ALGOMODE_HMAC</a:v>
+                              <a:v>CRYPTO_ALGOMODE_NOT_SET</a:v>
+                              <a:v>CRYPTO_ALGOMODE_OFB</a:v>
+                              <a:v>CRYPTO_ALGOMODE_RSAES_OAEP</a:v>
+                              <a:v>CRYPTO_ALGOMODE_RSAES_PKCS1_v1_5</a:v>
+                              <a:v>CRYPTO_ALGOMODE_RSASSA_PKCS1_v1_5</a:v>
+                              <a:v>CRYPTO_ALGOMODE_RSASSA_PSS</a:v>
+                              <a:v>CRYPTO_ALGOMODE_SIPHASH_2_4</a:v>
+                              <a:v>CRYPTO_ALGOMODE_SIPHASH_4_8</a:v>
+                              <a:v>CRYPTO_ALGOMODE_XTS</a:v>
+                            </a:da>
+                            <a:da name="DEFAULT" value="CRYPTO_ALGOMODE_NOT_SET"/>
+                            <a:da name="INVALID" type="XPath">
+                            <a:tst expr="(
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'RANDOM')
+                                            and
+                                            (
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_NOT_SET') and
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CUSTOM')
+                                            )
+                                           )"
+                                  true="For RANDOM please choose CRYPTO_ALGOFAM_NOT_SET, CRYPTO_ALGOMODE_NOT_SET"/> 
+                            <a:tst expr="(
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'HASH')
+                                            and
+                                            (
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_NOT_SET') and
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CUSTOM')
+                                            )
+                                           )"
+                                  true="For HASH please choose CRYPTO_ALGOMODE_NOT_SET, CRYPTO_ALGOMODE_CUSTOM."/>
+                            <a:tst expr="(
+                                          (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'AEAD_DECRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'AEAD_ENCRYPT')
+                                           )
+                                            and
+                                            (
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_GCM') and
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CCM') and
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CUSTOM')
+                                            )
+                                           )"
+                                  true="For AEAD_ENCRYPT, AEAD_DECRYPT services please select GCM, CCM or CUSTOM mode."/>   
+                            <a:tst expr="(
+                                          (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'SIGNATURE_GENERATE') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'SIGNATURE_VERIFY')
+                                           )
+                                            and
+                                          (
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CUSTOM') and
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_NOT_SET') and
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_RSASSA_PKCS1_v1_5') and
+                                            (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_RSASSA_PSS')
+                                           ) 
+                                           )"
+                                  true="For SIGNATURE_GENERATE, SIGNATURE_VERIFY please select CRYPTO_ALGOMODE_CUSTOM, CRYPTO_ALGOMODE_NOT_SET, CRYPTO_ALGOMODE_RSASSA_PKCS1_v1_5, CRYPTO_ALGOMODE_RSASSA_PSS."/>                                     
+                            <a:tst expr="(
+                                           (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'ENCRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'DECRYPT') = 'DECRYPT')
+                                            )
+                                            and
+                                            (node:fallback(../CryptoPrimitiveAlgorithmFamily, 'CRYPTO_ALGOFAM_AES') = 'CRYPTO_ALGOFAM_AES')
+                                            and
+                                            (
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CBC') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_ECB') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CTR') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CFB') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_OFB') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_XTS')
+                                            )
+                                           )"
+                                  true="For ENCRYPT/DECRYPT AES mode please select ECB, CBC, CTR, CFB, OFB or XTS."/>
+                            <a:tst expr="(
+                                           (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'ENCRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'DECRYPT') = 'DECRYPT')
+                                            )
+                                            and
+                                            (node:fallback(../CryptoPrimitiveAlgorithmFamily, 'CRYPTO_ALGOFAM_3DES') = 'CRYPTO_ALGOFAM_3DES')
+                                            and
+                                            (
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CBC') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_ECB') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CTR') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CFB') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_OFB')
+                                            )
+                                           )"
+                                  true="For ENCRYPT/DECRYPT 3DES mode please select ECB, CBC, CTR, CFB or OFB."/>
+                            <a:tst expr="(
+                                           (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'MAC_GENERATE') or
+                                            (node:fallback(../CryptoPrimitiveService, 'DECRYPT') = 'MAC_VERIFY')
+                                            )
+                                            and
+                                            (
+                                            (node:fallback(../CryptoPrimitiveAlgorithmFamily, 'CRYPTO_ALGOFAM_3DES') = 'CRYPTO_ALGOFAM_AES') or
+                                            (node:fallback(../CryptoPrimitiveAlgorithmFamily, 'CRYPTO_ALGOFAM_3DES') = 'CRYPTO_ALGOFAM_3DES')
+                                            )
+                                            and
+                                            (
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_HMAC') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CMAC') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_GMAC') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_CUSTOM') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_NOT_SET')
+                                            )
+                                           )"
+                                  true="For MAC_GENERATE or MAC_VERIFY, AES and 3DES modes, please select: HMAC, CMAC, GMAC, CUSTOM, NOT_SET as CryptoPrimitiveAlgorithmMode."/>                                  
+                            <a:tst expr="(
+                                           (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'ENCRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'DECRYPT') = 'DECRYPT')
+                                            )
+                                            and
+                                            (node:fallback(../CryptoPrimitiveAlgorithmFamily, 'CRYPTO_ALGOFAM_RSA') = 'CRYPTO_ALGOFAM_RSA')
+                                            and
+                                            (
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_RSAES_PKCS1_v1_5') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_RSAES_OAEP')
+                                            )
+                                           )"
+                                  true="For ENCRYPT/DECRYPT RSA mode please select RSAES_OAEP or RSAES_PKCS1_v1_5."/>
+                            <a:tst expr="(
+                                           (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'ENCRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'DECRYPT') = 'DECRYPT')
+                                            )
+                                            and
+                                            (node:fallback(../CryptoPrimitiveAlgorithmFamily, 'CRYPTO_ALGOFAM_CHACHA') = 'CRYPTO_ALGOFAM_CHACHA')
+                                            and
+                                            (
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_12ROUNDS') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_20ROUNDS') and
+                                                (node:fallback(., 'CRYPTO_ALGOMODE_NOT_SET') != 'CRYPTO_ALGOMODE_8ROUNDS')
+                                            )
+                                           )"
+                                  true="For ENCRYPT/DECRYPT CHACHA mode please select 12ROUNDS, 20ROUNDS or 8ROUNDS."/>
+                                  
+                          </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoPrimitiveAlgorithmSecondaryFamily_Object -->
+                          <v:var name="CryptoPrimitiveAlgorithmSecondaryFamily" type="ENUMERATION">
+                            <a:a name="DESC" 
+                                 value="EN: Determines the algorithm secondary family used for the crypto service"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:ba685378-f161-4115-9ad1-c88287778e9d"/>
+                            <a:da name="RANGE">
+                              <a:v>CRYPTO_ALGOFAM_3DES</a:v>
+                              <a:v>CRYPTO_ALGOFAM_AES</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BLAKE_1_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BLAKE_1_512</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BLAKE_2s_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BLAKE_2s_512</a:v>
+                              <a:v>CRYPTO_ALGOFAM_BRAINPOOL</a:v>
+                              <a:v>CRYPTO_ALGOFAM_CHACHA</a:v>
+                              <a:v>CRYPTO_ALGOFAM_CUSTOM</a:v>
+                              <a:v>CRYPTO_ALGOFAM_ECCNIST</a:v>
+                              <a:v>CRYPTO_ALGOFAM_ECIES</a:v>
+                              <a:v>CRYPTO_ALGOFAM_ED25519</a:v>
+                              <a:v>CRYPTO_ALGOFAM_NOT_SET</a:v>
+                              <a:v>CRYPTO_ALGOFAM_RIPEMD160</a:v>
+                              <a:v>CRYPTO_ALGOFAM_RNG</a:v>
+                              <a:v>CRYPTO_ALGOFAM_RSA</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SECURECOUNTER</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA1</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_224</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_384</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_512</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_512_224</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA2_512_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA3_224</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA3_256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA3_384</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHA3_512</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHAKE128</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SHAKE256</a:v>
+                              <a:v>CRYPTO_ALGOFAM_SIPHASH</a:v>
+                            </a:da>
+                          <a:da name="DEFAULT" value="CRYPTO_ALGOFAM_NOT_SET"/>
+                          <a:da name="INVALID" type="XPath">
+                            <a:tst expr="(
+                                           (
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'HASH') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'RANDOM') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'ENCRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'DECRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'MAC_GENERATE') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'MAC_VERIFY') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'AEAD_DECRYPT') or
+                                            (node:fallback(../CryptoPrimitiveService, 'ENCRYPT') = 'AEAD_ENCRYPT')
+                                            )
+                                            and
+                                            (
+                                            (node:fallback(., 'CRYPTO_ALGOFAM_NOT_SET') != 'CRYPTO_ALGOFAM_NOT_SET') and
+                                            (node:fallback(., 'CRYPTO_ALGOFAM_NOT_SET') != 'CRYPTO_ALGOFAM_CUSTOM')
+                                            )
+                                           )"
+                                  true="For HASH, RANDOM, ENCRYPT, DECRYPT, MAC_GENERATE, MAC_VERIFY, AEAD_DECRYPT, AEAD_ENCRYPT please choose CRYPTO_ALGOFAM_NOT_SET, CRYPTO_ALGOFAM_CUSTOM for CryptoPrimitiveAlgorithmSecondaryFamily."/>                               
+                          </a:da>
+                          </v:var>
+                          
+                          <!-- @implements CryptoPrimitiveService_Object -->
+                          <v:var name="CryptoPrimitiveService" type="ENUMERATION">
+                            <a:a name="DESC" 
+                                 value="EN: Determines the crypto service used for defining the capabilities"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:e5750a9c-0208-4203-bc14-2e2a104eebbe"/>
+                            <a:da name="DEFAULT" value="RANDOM"/>
+                            <a:da name="RANGE">
+                              <a:v>AEAD_DECRYPT</a:v>
+                              <a:v>AEAD_ENCRYPT</a:v>
+                              <a:v>DECRYPT</a:v>
+                              <a:v>ENCRYPT</a:v>
+                              <a:v>HASH</a:v>
+                              <a:v>MAC_GENERATE</a:v>
+                              <a:v>MAC_VERIFY</a:v>
+                              <a:v>RANDOM</a:v>
+                              <a:v>SIGNATURE_GENERATE</a:v>
+                              <a:v>SIGNATURE_VERIFY</a:v>
+                            </a:da>
+                          </v:var>
+                        </v:ctr>
+                      </v:lst>
+                    </v:ctr>
+                  </v:lst>
+                  
+                  <v:ctr name="CryptoKeyGenerates" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: Container for Crypto key generate"/>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="UUID" 
+                           value="ECUC:5155f21f-b22d-4d0b-9f0e-f4fa3d30890d"/>
+                       <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                    <v:lst name="CryptoKeyGenerate" type="MAP">
+                        <a:da name="MIN" value="1"/>
+                        <a:a name="COLUMNS"> 
+                         <a:v>CryptoKeyGenerate</a:v>
+                         <a:v>CryptoDestKeyId</a:v>
+                         <a:v>CryptoKeySize</a:v>
+                         <a:v>CryptoKeyRef</a:v>
+                       </a:a>
+                       
+                        <!--CryptoKeyGenerate_Object -->
+                        <v:ctr name="CryptoKeyGenerate" type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: Configuration of a CryptoKeyGenerate"/>
+                          <a:a name="UUID" 
+                               value="ECUC:ac421805-1267-448b-bfa6-22a8837d940e"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                         </a:a>
+                          <!--CryptoDestKeyId_Object -->
+                          <v:var name="CryptoDestKeyId" type="INTEGER">
+                            <a:a name="DESC" 
+                                 value="EN: Crypto Destination Key Index"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="NXP"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:ad83f58c-f09a-47c7-bf87-0836d47de5fe"/>
+                            <a:da name="DEFAULT" value="1"/>
+                            <a:da name="INVALID" type="Range">
+                              <a:tst expr="&lt;=4294967295"/>
+                              <a:tst expr="&gt;=1"/>
+                            </a:da>
+                          </v:var>
+                          
+                          <!--CryptoKeySize_Object -->
+                          <v:var name="CryptoKeySize" type="INTEGER">
+                            <a:a name="DESC" 
+                                 value="EN: Size of a CRYPTO key value in bytes"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="NXP"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:bc5ef14a-bc9b-4a17-b045-1567e9ba30c4"/>
+                            <a:da name="DEFAULT" value="16"/>
+                            <a:da name="INVALID" type="Range">
+                              <a:tst expr="&lt;=4294967295"/>
+                              <a:tst expr="&gt;=1"/>
+                            </a:da>
+                          </v:var>
+                          
+                          <!--CryptoKeyRef_Object -->
+                          <v:ref name="CryptoKeyRef" type="REFERENCE">
+                            <a:a name="DESC" 
+                                 value="EN: Refers to a pointer in the CRYPTOto a CryptoKey. The CryptoKey provides the information which key elements are contained in a CryptoKeyId."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="NXP"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:3e09bbfd-822c-44ff-9cf1-ba296e55b277"/>
+                            <a:da name="REF" 
+                                  value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Crypto/CryptoKeys/CryptoKey"/>
+                          <a:da name="RANGE" type="XPath">
+                                <a:tst expr="node:paths(../CryptoKey/*)"/> <!-- Select for reference only the options available inside the CryptoKey -->
+                          </a:da>
+                          <a:da name="INVALID" type="XPath">
+                                <a:tst expr="node:refvalid(.)" 
+                                        false="The configured node does not exist or may not be referenced."/>                                          
+                                <a:tst expr="text:uniq(../../*/CryptoKeyRef, .)"
+                                false="Duplicated value, CryptoKeyRef must be unique."/>
+                          </a:da>
+                          </v:ref>
+                          
+                        </v:ctr>
+                    </v:lst>
+                </v:ctr>
+                
+                <v:ctr name="CryptoExportKeys" type="IDENTIFIABLE">
+                      <a:a name="DESC" 
+                           value="EN: Container for Crypto Export key"/>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                       </a:a>
+                      <a:a name="UUID" 
+                           value="ECUC:c4c8b714-1300-4359-870e-5574a13cf853"/>
+                    <v:lst name="CryptoExportKey" type="MAP">
+                        <a:da name="MIN" value="1"/>
+                        <a:a name="COLUMNS"> 
+                         <a:v>CryptoExportKey</a:v>
+                         <a:v>KeyId</a:v>
+                         <a:v>KeyElementId</a:v>
+                         <a:v>PtrLength</a:v>
+                         <a:v>CryptoKeyRef</a:v>
+                       </a:a>
+                       
+                        <!--CryptoExportKey_Object -->
+                        <v:ctr name="CryptoExportKey" type="IDENTIFIABLE">
+                          <a:a name="DESC" 
+                               value="EN: Configuration of a CryptoExportKey"/>
+                          <a:a name="UUID" 
+                               value="ECUC:cc8de023-2381-4bcd-88b0-60cb6f481e31"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                       </a:a>
+                          <!--KeyId_Object -->
+                          <v:var name="KeyId" type="INTEGER">
+                            <a:a name="DESC" 
+                                 value="EN:Key Id"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="NXP"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:de33979f-2cbf-49d4-8a99-1dee33941d7e"/>
+                            <a:da name="DEFAULT" value="1"/>
+                            <a:da name="INVALID" type="Range">
+                              <a:tst expr="&lt;=4294967295"/>
+                              <a:tst expr="&gt;=1"/>
+                            </a:da>
+                          </v:var>
+                          
+                          <!--KeyElementId_Version_Object -->
+                          <v:var name="KeyElementId" type="INTEGER">
+                            <a:a name="DESC" 
+                                 value="EN: KeyElementId"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="NXP"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:ebf5393d-97e9-446a-8b4f-2e8d29a3cc2c"/>
+                            <a:da name="DEFAULT" value="1"/>
+                            <a:da name="INVALID" type="Range">
+                              <a:tst expr="&lt;=4294967295"/>
+                              <a:tst expr="&gt;=0"/>
+                            </a:da>
+                          </v:var>
+                          
+                          <!--PtrLength_Object -->
+                          <v:var name="PtrLength" type="INTEGER">
+                            <a:a name="DESC" 
+                                 value="EN: PtrLength"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="NXP"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:dc5a2378-c992-48f6-9ecd-f72d942fd718"/>
+                            <a:da name="DEFAULT" value="0"/>
+                            <a:da name="INVALID" type="Range">
+                              <a:tst expr="&lt;=4294967295"/>
+                              <a:tst expr="&gt;=0"/>
+                            </a:da>
+                          </v:var>
+                          
+                          <!--CryptoKeyRef_Object -->
+                          <v:ref name="CryptoKeyRef" type="REFERENCE">
+                            <a:a name="DESC" 
+                                 value="EN: Refers to a pointer in the CRYPTOto a CryptoKey. The CryptoKey provides the information which key elements are contained in a CryptoKeyId."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="ORIGIN" value="NXP"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:58c255ce-8d3f-444c-ae60-a13d7314e751"/>
+                            <a:da name="REF" 
+                                  value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Crypto/CryptoKeys/CryptoKey"/>
+                          <a:da name="RANGE" type="XPath">
+                                <a:tst expr="node:paths(../CryptoKey/*)"/> <!-- Select for reference only the options available inside the CryptoKey -->
+                          </a:da>
+                          <a:da name="INVALID" type="XPath">
+                                <a:tst expr="node:refvalid(.)" 
+                                        false="The configured node does not exist or may not be referenced."/>                                          
+                                <a:tst expr="text:uniq(../../*/CryptoKeyRef, .)"
+                                false="Duplicated value, CryptoKeyRef must be unique."/>
+                          </a:da>
+                          </v:ref>
+                          
+                        </v:ctr>
+                    </v:lst>
+                </v:ctr>
+                
+              <!-- @implements CommonPublishedInformation_Object -->
+              <v:ctr name="CommonPublishedInformation" type="IDENTIFIABLE">
+                  <a:a name="LABEL" value="Common Published Information"/>
+                  <a:a name="DESC">
+                      <a:v>
+                          <![CDATA[EN:
+                              <html>
+                              <p>Common container, aggregated by all modules. It contains published information about vendor and versions.</p>
+                              </html>
+                          ]]>
+                      </a:v>
+                  </a:a>
+                  <a:a name="UUID" value="ECUC:9956f1f1-bff6-45ea-a7e9-ccaa70599727"/>
+                
+                  <v:var name="ArReleaseMajorVersion" type="INTEGER_LABEL">
+                      <a:a name="LABEL" value="AUTOSAR Major Version"/>
+                      <a:a name="DESC">
+                          <a:v>
+                              <![CDATA[EN:
+                                  <html>
+                                  <p>Vendor specific: Major version number of AUTOSAR specification on which the appropriate implementation is based on.</p>
+                                  </html>
+                              ]]>
+                          </a:v>
+                      </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="NXP"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" value="ECUC:66b8f123-9bf5-4365-a866-6c1beaaa2a9f"/>
+                      <a:da name="DEFAULT" value="4"/>                       
+                      <a:da name="INVALID" type="Range">
+                          <a:tst expr="&gt;=4"/>
+                          <a:tst expr="&lt;=4"/>
+                      </a:da>                    
+                  </v:var>
+                
+                  <v:var name="ArReleaseMinorVersion" type="INTEGER_LABEL">
+                      <a:a name="LABEL" value="AUTOSAR Minor Version"/>
+                      <a:a name="DESC">
+                          <a:v>
+                              <![CDATA[EN:
+                                  <html>
+                                  <p>Vendor specific: Minor version number of AUTOSAR specification on which the appropriate implementation is based on.</p>
+                                  </html>
+                              ]]>
+                          </a:v>
+                      </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="NXP"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" value="ECUC:d21a16d5-553c-4da2-893d-11edcc80e3f2"/>
+                      <a:da name="DEFAULT" value="3"/>                       
+                      <a:da name="INVALID" type="Range">
+                          <a:tst expr="&gt;=3"/>
+                          <a:tst expr="&lt;=3"/>
+                      </a:da>                    
+                  </v:var>
+                
+                  <v:var name="ArReleaseRevisionVersion" type="INTEGER_LABEL">
+                      <a:a name="LABEL" value="AUTOSAR Patch Version"/>
+                      <a:a name="DESC">
+                          <a:v>
+                              <![CDATA[EN:
+                                  <html>
+                                  <p>Vendor specific: Patch version number of AUTOSAR specification on which the appropriate implementation is based on.</p>
+                                  </html>
+                              ]]>
+                          </a:v>
+                      </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="NXP"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" value="ECUC:b676214d-048d-4372-9e45-1120274094e9"/>
+                      <a:da name="DEFAULT" value="1"/>                       
+                      <a:da name="INVALID" type="Range">
+                          <a:tst expr="&gt;=1"/>
+                          <a:tst expr="&lt;=1"/>
+                      </a:da>  
+                  </v:var>
+                
+                  <v:var name="ModuleId" type="INTEGER_LABEL">
+                      <a:a name="LABEL" value="Numeric Module ID"/>
+                      <a:a name="DESC">
+                          <a:v>
+                              <![CDATA[EN:
+                                  <html>
+                                  <p>Vendor specific: Module ID of this module.</p>
+                                  </html>
+                              ]]>
+                          </a:v>
+                      </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="NXP"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" value="ECUC:81e50058-1c3a-464f-88c2-14534833f201"/>
+                      <a:da name="DEFAULT" value="114"/>
+                      <a:da name="INVALID" type="Range">
+                          <a:tst expr="&gt;=114"/>
+                          <a:tst expr="&lt;=114"/>
+                      </a:da>                          
+                  </v:var>
+                
+                  <v:var name="SwMajorVersion" type="INTEGER_LABEL">
+                      <a:a name="LABEL" value="Software Major Version"/>
+                      <a:a name="DESC">
+                          <a:v>
+                              <![CDATA[EN:
+                                  <html>
+                                  <p>Major version number of the vendor specific implementation of the module. The numbering is vendor specific.</p>
+                                  </html>
+                              ]]>
+                          </a:v>
+                      </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="NXP"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" value="ECUC:f7e52441-a341-495d-a311-56319dbe48ab"/>
+                      <a:da name="DEFAULT" value="1"/>
+                      <a:da name="INVALID" type="Range">
+                          <a:tst expr="&gt;=1"/>
+                          <a:tst expr="&lt;=1"/>
+                      </a:da>                          
+                  </v:var>
+                
+                  <v:var name="SwMinorVersion" type="INTEGER_LABEL">
+                      <a:a name="LABEL" value="Software Minor Version"/>
+                      <a:a name="DESC">
+                          <a:v>
+                              <![CDATA[EN:
+                                  <html>
+                                  <p>Minor version number of the vendor specific implementation of the module. The numbering is vendor specific.</p>
+                                  </html>
+                              ]]>
+                          </a:v>
+                      </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="NXP"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" value="ECUC:9023bc4f-82f2-4011-bc46-6228805c7e78"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                          <a:tst expr="&gt;=0"/>
+                          <a:tst expr="&lt;=0"/>
+                      </a:da>                             
+                  </v:var>
+                
+                  <v:var name="SwPatchVersion" type="INTEGER_LABEL">
+                      <a:a name="LABEL" value="Software Patch Version"/>
+                      <a:a name="DESC">
+                          <a:v>
+                              <![CDATA[EN:
+                                  <html>
+                                  <p>Patch level version number of the vendor specific implementation of the module. The numbering is vendor specific.</p>
+                                  </html>
+                              ]]>
+                          </a:v>
+                      </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+                     </a:a>
+                      <a:a name="ORIGIN" value="NXP"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" value="ECUC:16c1307a-4de3-4609-82f6-7e1100f78160"/>
+                      <a:da name="DEFAULT" value="2"/>
+                      <a:da name="INVALID" type="Range">
+                          <a:tst expr="&gt;=2"/>
+                          <a:tst expr="&lt;=2"/>
+                      </a:da>                            
+                  </v:var>
+                
+                  <v:var name="VendorApiInfix" type="STRING_LABEL">
+                      <a:a name="LABEL" value="Vendor Api Infix"/>
+                      <a:a name="DESC">
+                          <a:v>
+                              <![CDATA[EN:
+                                  <html>
+                                  <p>In driver modules which can be instantiated several times on a single ECU, BSW00347 requires that the name of APIs is extended by the VendorId and a vendor specific name.
+                                  This parameter is used to specify the vendor specific name. In total, the implementation specific name is generated as follows:
+                                  &lt;ModuleName&gt;_&gt;VendorId&gt;_&lt;VendorApiInfix&gt;&lt;Api name from SWS&gt;.
+                                  E.g.  assuming that the VendorId of the implementor is 123 and the implementer chose a VendorApiInfix of &quot;v11r456&quot; a api name Can_Write defined in the SWS will translate to Can_123_v11r456Write.
+                                  This parameter is mandatory for all modules with upper multiplicity &gt; 1. It shall not be used for modules with upper multiplicity =1.
+                                  </p>
+                                  </html>
+                              ]]>
+                          </a:v>
+                      </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                         <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="NXP"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" value="ECUC:c2017351-3b3d-4fb6-b504-7792754b1fc2"/>
+                      <a:da name="DEFAULT" value=""/>
+                      <a:a name="OPTIONAL" value="true"/>
+                      <a:da name="READONLY" value="true"/>
+                  </v:var>
+                
+                  <v:var name="VendorId" type="INTEGER_LABEL">
+                      <a:a name="LABEL" value="Vendor ID"/>
+                      <a:a name="DESC">
+                          <a:v>
+                              <![CDATA[EN:
+                                  <html>
+                                  <p>Vendor ID of the dedicated implementation of this module according to the AUTOSAR vendor list.</p>
+                                  </html>
+                              ]]>
+                          </a:v>
+                      </a:a>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="NXP"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" value="ECUC:6e8602ce-59d0-4f63-924d-3411dd0fbe7f"/>
+                      <a:da name="DEFAULT" value="43"/>
+                      <a:da name="INVALID" type="Range">
+                          <a:tst expr="&gt;=43"/>
+                          <a:tst expr="&lt;=43"/>
+                      </a:da>                            
+                  </v:var>                  
+              </v:ctr>
+             <d:ref type="REFINED_MODULE_DEF" value="ASPath:/AUTOSAR/EcucDefs/Crypto"/>              
+            </v:ctr>
+          </d:chc>
+        <d:chc name="M4_XDM_AR_MODULE_NAME_EcuParameterDefinition" 
+             type="AR-ELEMENT" value="ECU_PARAMETER_DEFINITION">
+        <d:ctr type="AR-ELEMENT">
+          <a:a name="UUID" value="ECUC:f23762d6-4749-4f48-a7b5-c2cb915659ca"/>
+          <a:a name="DEF" 
+               value="ASPath:/AR_PACKAGE_SCHEMA/ECU_PARAMETER_DEFINITION"/>
+          <d:lst name="MODULE_REF">
+            <d:ref type="MODULE_REF" value="ASPath:/TS_T40D2M10I2R0/Crypto"/>
+          </d:lst>
+        </d:ctr>
+        </d:chc>
+          <d:chc name="Crypto_ModuleDescription" type="AR-ELEMENT" value="BSW_MODULE_DESCRIPTION">
+            <d:ctr type="AR-ELEMENT">
+                <a:a name="DEF"
+                    value="ASPath:/AR_PACKAGE_SCHEMA/BSW_MODULE_DESCRIPTION"/>
+                <d:var name="MODULE_ID" type="INTEGER" >
+                    <a:a name="EDITABLE" value="false"/>
+                    <a:a name="IMPORTER_INFO" value="@DEF"/>
+                </d:var>
+                <d:ref type="RECOMMENDED_CONFIGURATION" >
+                    <a:a name="EDITABLE" value="false"/>
+                    <a:a name="IMPORTER_INFO" value="@DEF"/>
+                </d:ref>
+                <d:ref type="PRE_CONFIGURED_CONF" >
+                    <a:a name="EDITABLE" value="false"/>
+                    <a:a name="IMPORTER_INFO" value="@DEF"/>
+                </d:ref>
+                <d:ref type="VENDOR_SPECIFIC_MODULE_DEF"
+                    value="ASPath:/TS_T40D2M10I2R0/Crypto"/>
+            </d:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>
